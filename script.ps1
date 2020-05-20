@@ -1,9 +1,9 @@
-Write-Host "Provisioning machine" -ForegroundColor Yellowpowe
+Write-Host "Provisioning machine" -ForegroundColor Yellow
 
 # Note, this may need to be run BEFORE this script
-# Set-ExecutionPolicy Unrestricted -Scope CurrentUser -Force -ErrorAction Ignore
+Set-ExecutionPolicy Unrestricted -Scope CurrentUser -Force -ErrorAction Ignore
 
-Write-Host "System Configuration" -ForegroundColor Yellowpowe
+Write-Host "System Configuration" -ForegroundColor Yellow
 #--- Enable developer mode on the system ---
 Set-ItemProperty -Path HKLM:\Software\Microsoft\Windows\CurrentVersion\AppModelUnlock -Name AllowDevelopmentWithoutDevLicense -Value 1
 
@@ -23,27 +23,64 @@ Set-WindowsExplorerOptions -EnableShowHiddenFilesFoldersDrives -EnableShowProtec
 #Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name MMTaskbarMode -Value 2
 
 # Install Chocolatey
-Set-ExecutionPolicy Bypass -Scope Process -Force;
-[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072;
-iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+# Set-ExecutionPolicy Bypass -Scope Process -Force;
+# [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072;
+# iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 
 
-# Install Nuget provider if needed
-$providers = Get-PackageProvider | Select-Object Name
-if (-not ($providers.Name.Contains("NuGet"))) {
-    Write-Host "NuGet not installed, installing..." -ForegroundColor Yellow
-    Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.208 -Force | Out-Null
-}
+# # Install Nuget provider if needed
+# $providers = Get-PackageProvider | Select-Object Name
+# if (-not ($providers.Name.Contains("NuGet"))) {
+#     Write-Host "NuGet not installed, installing..." -ForegroundColor Yellow
+#     Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.208 -Force | Out-Null
+# }
 
-# Install Chocolatey provider if needed
-if (-not ($providers.Name.Contains("Chocolatey"))) {
-    Write-Host "NuGet not installed, installing..." -ForegroundColor Yellow
-    Install-PackageProvider -Name Chocolatey -MinimumVersion 2.8.5.130 -Force | Out-Null
-}
+# # Install Chocolatey provider if needed
+# if (-not ($providers.Name.Contains("Chocolatey"))) {
+#     Write-Host "NuGet not installed, installing..." -ForegroundColor Yellow
+#     Install-PackageProvider -Name Chocolatey -MinimumVersion 2.8.5.130 -Force | Out-Null
+# }
 
-choco install -y git --package-parameters="'/GitAndUnixToolsOnPath /WindowsTerminal'"
-choco install -y github-desktop
+winget install terminal
+winget install vscode
+winget install Microsoft.VisualStudio.Community
+winget install git
+winget install GitHub.GitHubDesktop
+winget install 7zip
+winget install DockerDesktop
+winget install Microsoft.PowerToys
+winget install node
+python
+winget install wsl
+# winget install whatsapp
+
+# additional configuration
+# install vscode extensions (see vscode.ps1)
+# install visual studio components
+
+# Things not yet covered by winget
+# choco install -y git --package-parameters="'/GitAndUnixToolsOnPath /WindowsTerminal'"
 choco install -y fiddler
-choco install -y vscode
 choco install -y microsoft-edge-insider-dev
-choco install -y 7zip.install
+
+# other apps
+# - power toys
+# - utorrent
+# - monogame sdk
+# - Polar Flow
+# - Skype (desktop)
+# - WinMerge
+# - LinqPad
+
+# store apps
+# - heif
+# - hevc
+# - Microsoft To Do
+# - Netflix
+# - NextGen Reader
+# - OneNote for Windows 10
+# - spotify
+# - Skype (Store app)
+# - Xbox
+# - Xbox Console Companion
+# - Xbox Smartglass
