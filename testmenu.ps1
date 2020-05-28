@@ -47,8 +47,8 @@ function New-BinaryMenu {
     $result = $host.ui.PromptForChoice($Title, $Question, $options, 0)
 
     switch ($result) {
-        0 { 'You selected YES' }
-        1 { 'You selected NO' }
+        0 { return $true }
+        1 { return $false }
     }
 }
 
@@ -65,4 +65,4 @@ function New-BinaryMenu {
 #     Write-Host "Q: Press 'Q' to quit."
 # }
 
-New-BinaryMenu -Title 'Something' -Question 'Do you want to install X?'
+# New-BinaryMenu -Title 'Something' -Question 'Do you want to install X?'

@@ -10,3 +10,4 @@ if (!(Test-Path -Path $PROFILE )) { New-Item -Type File -Path $PROFILE -Force }
 
 Add-Content $profile "Import-Module posh-git"
 Add-Content $profile "Import-Module oh-my-posh"
+Add-Content $profile "Set-Theme Agnoster"

@@ -1,16 +1,27 @@
-Write-Host "Provisioning machine" -ForegroundColor Yellow
+# import custom menu
+. .\testmenu.ps1
+
+Write-Host "************************************" -ForegroundColor Blue
+Write-Host "*       Provisioning machine       *" -ForegroundColor Blue
+Write-Host "************************************" -ForegroundColor Blue
+
+Write-Host "STEP 1 : System Configuration" -ForegroundColor Yellow
 
 # Note, this may need to be run BEFORE this script
 Set-ExecutionPolicy Unrestricted -Scope CurrentUser -Force -ErrorAction Ignore
 
-Write-Host "System Configuration" -ForegroundColor Yellow
-#--- Enable developer mode on the system ---
-Set-ItemProperty -Path HKLM:\Software\Microsoft\Windows\CurrentVersion\AppModelUnlock -Name AllowDevelopmentWithoutDevLicense -Value 1
 
-#--- Configuring Windows properties ---
-#--- Windows Features ---
+# --- Enable developer mode on the system ---
+Write-Host " - Enabling Developer Mode ... " -NoNewline
+Set-ItemProperty -Path HKLM:\Software\Microsoft\Windows\CurrentVersion\AppModelUnlock -Name AllowDevelopmentWithoutDevLicense -Value 1
+Write-Host "DONE" -ForegroundColor Green
+
+# --- Configuring Windows properties ---
+# --- Windows Features ---
 # Show hidden files, Show protected OS files, Show file extensions
+Write-Host " - Show Hidden files and folders, OS Files, and file extensions ... " -NoNewline
 Set-WindowsExplorerOptions -EnableShowHiddenFilesFoldersDrives -EnableShowProtectedOSFiles -EnableShowFileExtensions
+Write-Host "DONE" -ForegroundColor Green
 
 #--- File Explorer Settings ---
 # will expand explorer to the actual folder you're in
@@ -22,55 +33,42 @@ Set-WindowsExplorerOptions -EnableShowHiddenFilesFoldersDrives -EnableShowProtec
 #taskbar where window is open for multi-monitor
 #Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name MMTaskbarMode -Value 2
 
-# Install Chocolatey
-# Set-ExecutionPolicy Bypass -Scope Process -Force;
-# [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072;
-# iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+Write-Host "STEP 2 : Installing Applications" -ForegroundColor Yellow
 
-
-# # Install Nuget provider if needed
-# $providers = Get-PackageProvider | Select-Object Name
-# if (-not ($providers.Name.Contains("NuGet"))) {
-#     Write-Host "NuGet not installed, installing..." -ForegroundColor Yellow
-#     Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.208 -Force | Out-Null
-# }
-
-# # Install Chocolatey provider if needed
-# if (-not ($providers.Name.Contains("Chocolatey"))) {
-#     Write-Host "NuGet not installed, installing..." -ForegroundColor Yellow
-#     Install-PackageProvider -Name Chocolatey -MinimumVersion 2.8.5.130 -Force | Out-Null
-# }
-
+# --- WINGET installs ---
 winget install terminal
 winget install vscode
 winget install Microsoft.VisualStudio.Community
 winget install git
 winget install GitHub.GitHubDesktop
-winget install 7zip
-winget install DockerDesktop
-winget install Microsoft.PowerToys
-winget install node
-python
-winget install wsl
-# winget install whatsapp
 
-# additional configuration
+winget install 7zip
+winget install Microsoft.PowerToys
+winget install fiddler
+winget install linqpad
+winget install WinMerge
+winget install Microsoft.EdgeDev
+winget install whatsapp
+winget install spotify
+winget install skype # desktop
+
+winget install DockerDesktop
+winget install node
+# winget install python
+# winget install wsl
+# winget install Microsoft.OneDrive
+
+# --- additional configuration ---
 # install vscode extensions (see vscode.ps1)
 # install visual studio components
 
-# Things not yet covered by winget
+# Things not yet covered by winget ??
 # choco install -y git --package-parameters="'/GitAndUnixToolsOnPath /WindowsTerminal'"
-choco install -y fiddler
-choco install -y microsoft-edge-insider-dev
 
 # other apps
-# - power toys
 # - utorrent
 # - monogame sdk
 # - Polar Flow
-# - Skype (desktop)
-# - WinMerge
-# - LinqPad
 
 # store apps
 # - heif
@@ -79,7 +77,6 @@ choco install -y microsoft-edge-insider-dev
 # - Netflix
 # - NextGen Reader
 # - OneNote for Windows 10
-# - spotify
 # - Skype (Store app)
 # - Xbox
 # - Xbox Console Companion
