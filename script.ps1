@@ -37,23 +37,23 @@ Write-Host "STEP 2 : Installing Applications" -ForegroundColor Yellow
 
 # --- WINGET installs ---
 winget install terminal
-winget install vscode
-winget install Microsoft.VisualStudio.Community
-winget install git
-winget install GitHub.GitHubDesktop
+winget install Microsoft.VisualStudioCode -e
+winget install Microsoft.VisualStudio.Community -e
+winget install Git.Git --override /GitAndUnixToolsOnPath --override /WindowsTerminal -e
+winget install GitHub.GitHubDesktop -e
 
-winget install 7zip
-winget install Microsoft.PowerToys
-winget install fiddler
-winget install linqpad
-winget install WinMerge
-winget install Microsoft.EdgeDev
-winget install whatsapp
-winget install spotify
-winget install skype # desktop
+winget install 7zip -e
+winget install Microsoft.PowerToys -e
+winget install fiddler -e
+winget install linqpad -e
+winget install WinMerge -e
+winget install Microsoft.EdgeDev -e
+winget install whatsapp -e
+winget install spotify -e
+winget install skype -e # desktop
 
-winget install DockerDesktop
-winget install node
+winget install DockerDesktop -e
+winget install node -e
 # winget install python
 # winget install wsl
 # winget install Microsoft.OneDrive
@@ -81,3 +81,21 @@ winget install node
 # - Xbox
 # - Xbox Console Companion
 # - Xbox Smartglass
+
+# --- Install VS Code Extensions
+. .\vscode\vscode.ps1
+
+Copy-Item ".\vscode\keybindings.json" -Destination "%UserProfile%\AppData\Roaming\Code\User\keybindings.json" -Force
+Copy-Item ".\vscode\settings.json" -Destination "%UserProfile%\AppData\Roaming\Code\User\settings.json" -Force
+
+# --- Configure Windows Terminal / Powershell
+. .\ohmyposh.ps1
+
+
+
+# $option = New-BinaryMenu -Title 'Something' -Question 'Do you want to install X?'
+
+# if ($option) {
+# Write-Host "Recevied: " -NoNewline
+# Write-Host $option
+# }
