@@ -13,3 +13,7 @@ Write-Host "DONE" -ForegroundColor Green
 Write-Host ".: Exporting VS Code Settings ... " -NoNewline
 Copy-Item "%UserProfile%\AppData\Roaming\Code\User\settings.json" -Destination ".\vscode\settings.json" -Force
 Write-Host "DONE" -ForegroundColor Green
+
+Write-Host ".: Backing Up ThrottleStop... " -NoNewline
+Compress-Archive -Path C:\Users\fmmen\Documents\ThrottleStop -DestinationPath .\throttlestop\ts.zip
+Write-Host "DONE" -ForegroundColor Green

@@ -49,7 +49,7 @@ winget install linqpad -e
 winget install WinMerge -e
 winget install Microsoft.EdgeDev -e
 winget install whatsapp -e
-winget install spotify -e
+winget install Spotify.Spotify -e
 winget install skype -e # desktop
 
 winget install DockerDesktop -e
