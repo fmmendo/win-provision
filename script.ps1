@@ -31,12 +31,14 @@ Write-Host "DONE" -ForegroundColor Green
 #opens PC to This PC, not quick access
 #Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name LaunchTo -Value 1
 #taskbar where window is open for multi-monitor
-#Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name MMTaskbarMode -Value 2
+Write-Host " - Set up Task Bar for multi-monitor ... " -NoNewline
+Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name MMTaskbarMode -Value 2
+Write-Host "DONE" -ForegroundColor Green
 
 Write-Host "STEP 2 : Installing Applications" -ForegroundColor Yellow
 
 # --- WINGET installs ---
-winget install terminal
+winget install terminal -e
 winget install Microsoft.VisualStudioCode -e
 winget install Microsoft.VisualStudio.Community -e
 winget install Git.Git --override /GitAndUnixToolsOnPath --override /WindowsTerminal -e
@@ -59,10 +61,8 @@ winget install node -e
 # winget install Microsoft.OneDrive
 
 # --- additional configuration ---
-# install vscode extensions (see vscode.ps1)
 # install visual studio components
 
-# Things not yet covered by winget ??
 # choco install -y git --package-parameters="'/GitAndUnixToolsOnPath /WindowsTerminal'"
 
 # other apps
@@ -83,14 +83,19 @@ winget install node -e
 # - Xbox Smartglass
 
 # --- Install VS Code Extensions
+Write-Host "STEP 3 : Configuring VS Code" -ForegroundColor Yellow
 . .\vscode\vscode.ps1
 
+Write-Host ".: Configuring VS Code Key Bindings ... " -NoNewline
 Copy-Item ".\vscode\keybindings.json" -Destination "%UserProfile%\AppData\Roaming\Code\User\keybindings.json" -Force
+Write-Host "DONE" -ForegroundColor Green
+Write-Host ".: Configuring VS Code Settings ... " -NoNewline
 Copy-Item ".\vscode\settings.json" -Destination "%UserProfile%\AppData\Roaming\Code\User\settings.json" -Force
+Write-Host "DONE" -ForegroundColor Green
 
 # --- Configure Windows Terminal / Powershell
+Write-Host "STEP 4 : Configuring Windows Terminal" -ForegroundColor Yellow
 . .\ohmyposh.ps1
-
 
 
 # $option = New-BinaryMenu -Title 'Something' -Question 'Do you want to install X?'
