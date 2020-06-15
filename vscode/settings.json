@@ -2,5 +2,6 @@
     "git.enableSmartCommit": true,
     "editor.fontSize": 12,
     "git.autofetch": true,
-    "workbench.iconTheme": "material-icon-theme"
+    "workbench.iconTheme": "material-icon-theme",
+    "debug.javascript.usePreview": true
 }

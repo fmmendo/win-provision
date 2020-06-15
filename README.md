@@ -15,6 +15,6 @@
  - [x] Install VS Code Extensions
  - [x] Copy VS Code keybindings and settings
  - [x] Configure oh-my-posh
- - [ ] Configure Windows Terminal 
+ - [x] Configure Windows Terminal 
  - [x] Script to backup existing files/settings
  - [ ] Configurable steps ?
