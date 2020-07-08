@@ -20,7 +20,7 @@ Write-Host "DONE" -ForegroundColor Green
 # --- Windows Features ---
 # Show hidden files, Show protected OS files, Show file extensions
 Write-Host " - Show Hidden files and folders, OS Files, and file extensions ... " -NoNewline
-Set-WindowsExplorerOptions -EnableShowHiddenFilesFoldersDrives -EnableShowProtectedOSFiles -EnableShowFileExtensions
+#Set-WindowsExplorerOptions -EnableShowHiddenFilesFoldersDrives -EnableShowProtectedOSFiles -EnableShowFileExtensions
 Write-Host "DONE" -ForegroundColor Green
 
 #--- File Explorer Settings ---
@@ -38,24 +38,21 @@ Write-Host "DONE" -ForegroundColor Green
 Write-Host "STEP 2 : Installing Applications" -ForegroundColor Yellow
 
 # --- WINGET installs ---
-winget install terminal -e
+winget install Microsoft.WindowsTerminal -e
 winget install Microsoft.VisualStudioCode -e
-winget install Microsoft.VisualStudio.Community -e
 winget install Git.Git --override /GitAndUnixToolsOnPath --override /WindowsTerminal -e
 winget install GitHub.GitHubDesktop -e
-
-winget install 7zip -e
+winget install 7zip.7zip -e
 winget install Microsoft.PowerToys -e
-winget install fiddler -e
-winget install linqpad -e
-winget install WinMerge -e
+winget install Telerik.Fiddler -e
+#winget install linqpad -e
+#winget install WinMerge -e
 winget install Microsoft.EdgeDev -e
-winget install whatsapp -e
+winget install WhatsApp.WhatsApp -e
 winget install Spotify.Spotify -e
-winget install skype -e # desktop
-
-winget install DockerDesktop -e
-winget install node -e
+# winget install skype -e # desktop
+#winget install DockerDesktop -e
+#winget install node -e
 # winget install python
 # winget install wsl
 # winget install Microsoft.OneDrive
@@ -97,10 +94,14 @@ Write-Host "DONE" -ForegroundColor Green
 Write-Host "STEP 4 : Configuring Windows Terminal" -ForegroundColor Yellow
 . .\ohmyposh.ps1
 
-
 # $option = New-BinaryMenu -Title 'Something' -Question 'Do you want to install X?'
 
 # if ($option) {
 # Write-Host "Recevied: " -NoNewline
 # Write-Host $option
 # }
+
+
+Write-Host ".: Installing Visual Studio ... " -NoNewline
+winget install Microsoft.VisualStudio.Community -e
+Write-Host "DONE" -ForegroundColor Green
