@@ -3,6 +3,7 @@
 
 ## Provisioning machine
  - Reset / Install Windows 10 
+ - Run `Set-ExecutionPolicy Unrestricted -Scope CurrentUser -Force -ErrorAction Ignore`
  - Run `.\script.ps1`
  - Done! 🎉 
 
