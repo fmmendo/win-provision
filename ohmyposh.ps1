@@ -32,7 +32,7 @@ Invoke-WebRequest -Uri $DLPath -OutFile $DLFile
 Write-Host "DONE" -ForegroundColor Green
 
 # 2. Extract files
-Expand-Archive -Path .$DLFile -DestinationPath '.\terminal\cascadia\'
+Expand-Archive -Path $DLFile -DestinationPath '.\terminal\cascadia\'
 
 # 3. Install fonts
 Write-Host " - Installing fonts ... " -NoNewline
