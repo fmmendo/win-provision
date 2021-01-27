@@ -1,7 +1,13 @@
 {
     "git.enableSmartCommit": true,
-    "editor.fontSize": 12,
     "git.autofetch": true,
     "workbench.iconTheme": "material-icon-theme",
-    "debug.javascript.usePreview": true
+    "debug.javascript.usePreview": true,
+    "terminal.integrated.fontFamily": "CaskaydiaCove Nerd Font",
+    "editor.fontFamily": "Cascadia Code, Consolas, 'Courier New', monospace",
+    "editor.fontSize": 12,
+    "editor.fontLigatures": true,
+    "csharp.semanticHighlighting.enabled": true,
+    "omnisharp.enableImportCompletion": true,
+    "omnisharp.enableRoslynAnalyzers": true,
 }
