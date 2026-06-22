@@ -1,0 +1,33 @@
+# Optional / situational VS Code extensions.
+# This file is NEVER overwritten by backup.ps1 - it's a hand-kept menu.
+# To install one: code --install-extension <id>
+
+# --- .NET / C# ---
+ms-dotnettools.csharp                 # C# (Roslyn) - also in extensions.txt
+ms-dotnettools.vscode-dotnet-runtime  # .NET runtime install tool
+formulahendry.dotnet                  # .NET Core tools
+formulahendry.dotnet-test-explorer    # test explorer
+jchannon.csharpextensions             # "new class" helpers
+patcx.vscode-nuget-gallery            # NuGet gallery
+ryanluker.vscode-coverage-gutters     # coverage gutters
+urbanoanderson.vscode-coverlet        # coverlet integration
+
+# --- Azure ---
+bencoleman.armview                    # ARM template viewer
+ms-azure-devops.azure-pipelines
+ms-azuretools.vscode-azureappservice
+ms-azuretools.vscode-azurefunctions
+ms-azuretools.vscode-azureresourcegroups
+ms-azuretools.vscode-azurestorage
+ms-azuretools.vscode-azurevirtualmachines
+ms-azuretools.vscode-cosmosdb
+ms-azuretools.vscode-docker
+ms-vscode.azure-account
+ms-vscode.azurecli
+ms-vscode.vscode-node-azure-pack
+msazurermtools.azurerm-vscode-tools
+
+# --- Collaboration ---
+ms-vsliveshare.vsliveshare
+ms-vsliveshare.vsliveshare-audio
+ms-vsliveshare.vsliveshare-pack

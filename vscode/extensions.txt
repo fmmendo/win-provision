@@ -1,0 +1,8 @@
+Angular.ng-template
+GitHub.vscode-pull-request-github
+ms-dotnettools.csharp
+ms-vscode-remote.remote-wsl
+ms-vscode.cpptools
+ms-vscode.js-debug-nightly
+ms-vscode.powershell
+PKief.material-icon-theme

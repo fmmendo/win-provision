@@ -1,0 +1,126 @@
+# yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
+
+###############################################################################
+# win-provision - declarative machine setup (WinGet Configuration / DSC).
+#
+# Apply directly with:
+#   winget configure --file .config/configuration.winget --accept-configuration-agreements
+# Validate first with:
+#   winget configure validate --file .config/configuration.winget
+#
+# ..or just run ..\script.ps1, which applies this and does the post-install steps.
+#
+# Idempotent: re-running only changes what isn't already in the desired state.
+# To trim the setup, comment out or delete any resource below.
+#
+# securityContext: elevated  => machine-wide install (one UAC prompt up front).
+# No securityContext         => per-user install (Spotify in particular MUST stay
+#                               per-user; its installer refuses to run elevated).
+###############################################################################
+
+properties:
+  assertions:
+    - resource: Microsoft.Windows.Developer/OsVersion
+      directives:
+        description: Require Windows 11 (build 22000+)
+        allowPrerelease: true
+      settings:
+        MinVersion: '10.0.22000'
+
+  resources:
+    # --- Windows settings -----------------------------------------------------
+    - resource: Microsoft.Windows.Settings/WindowsSettings
+      directives:
+        description: Enable Developer Mode
+        allowPrerelease: true
+        securityContext: elevated
+      settings:
+        DeveloperMode: true
+
+    # --- Core dev tools (per-user installs) -----------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Windows Terminal
+      settings:
+        id: Microsoft.WindowsTerminal
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Visual Studio Code
+      settings:
+        id: Microsoft.VisualStudioCode
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: GitHub Desktop
+      settings:
+        id: GitHub.GitHubDesktop
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Oh My Posh (prompt theme engine)
+      settings:
+        id: JanDeDobbeleer.OhMyPosh
+        source: winget
+
+    # --- Core dev tools (machine-wide installs) -------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Git
+        securityContext: elevated
+      settings:
+        id: Git.Git
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: 7-Zip
+        securityContext: elevated
+      settings:
+        id: 7zip.7zip
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: PowerToys
+        securityContext: elevated
+      settings:
+        id: Microsoft.PowerToys
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Fiddler Classic
+        securityContext: elevated
+      settings:
+        id: Telerik.Fiddler.Classic
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Microsoft Edge (Dev channel)
+        securityContext: elevated
+      settings:
+        id: Microsoft.Edge.Dev
+        source: winget
+
+    # --- Personal apps --------------------------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Spotify (per-user; do NOT elevate)
+      settings:
+        id: Spotify.Spotify
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: WhatsApp (Microsoft Store)
+      settings:
+        id: 9NKSQGP7F2NH
+        source: msstore
+
+    # --- Heavy: install last --------------------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Visual Studio 2022 Community (large download)
+        securityContext: elevated
+      settings:
+        id: Microsoft.VisualStudio.2022.Community
+        source: winget
+
+  configurationVersion: 0.2.0

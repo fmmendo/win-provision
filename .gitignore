@@ -1,0 +1,3 @@
+# Downloaded / generated artifacts - don't commit binaries into the repo
+*.zip
+terminal/cascadia/
